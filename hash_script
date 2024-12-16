@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Check number of args
+if [ "$#" -ne 1 ]; then
+	echo "Provide only one 4-digit integer"
+	exit 1
+fi
+
+input=$1
+
+# Check if arg is 4 digits
+if ! [[ "$input" =~ ^[0-9]{4}$ ]]; then
+	echo "Input must be 4 digits"
+	exit 1
+fi
+
+# Hash
+echo -n "$input" | sha256sum | awk '{print $1}'
